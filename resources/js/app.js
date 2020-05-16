@@ -13,3 +13,39 @@ require('./bootstrap');
  */
 
 require('./components/Example');
+
+
+import { Provider } from 'react-redux'
+import React from 'react'
+import ReactDOM from 'react-dom'
+import ReactRoot from './ReactRoot'
+import configureStore, { history } from './stores/configureStore'
+import { persistStore } from 'redux-persist'
+import { PersistGate } from 'redux-persist/integration/react'
+
+const store = configureStore()
+
+const pstore = persistStore(store)
+
+const render = (props) => {
+    ReactDOM.render(
+        <Provider store={store}>
+            <PersistGate loading={<p>loading...</p>} persistor={pstore}>
+                <ReactRoot history={history} responseSession={props} />
+            </PersistGate>
+        </Provider>,
+        document.getElementById('react-root')
+    )
+}
+
+function authSession()
+{
+    let params = new URLSearchParams();
+    let url = '/session';
+    window.axios.post(url,params)
+        .then((response)=>{
+            render(response.data)
+        })
+}
+
+authSession()

@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +12,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+    //     return view('welcome');
+    // });
+    Auth::routes(['verify' => true]);
+
+    Route::get('/register', 'ReactController@index')->name('register');
+    Route::get('password/reset', 'ReactController@index')->name('password.request');
+    Route::get('password/reset/{token}', 'ReactController@index')->name('password.reset');
+    Route::get('email/verify', 'ReactController@index')->name('verification.notice');
+
+    Route::get('/{router}', 'ReactController@index')->name('home');
+
+
+// Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
     // });
     Auth::routes(['verify' => true]);
 
-    Route::get('/register', 'ReactController@index')->name('register');
+    // Route::get('/register', 'ReactController@index')->name('register');
     Route::get('password/reset', 'ReactController@index')->name('password.request');
     Route::get('password/reset/{token}', 'ReactController@index')->name('password.reset');
     Route::get('email/verify', 'ReactController@index')->name('verification.notice');
@@ -25,6 +25,6 @@ use Illuminate\Support\Facades\Route;
     Route::get('/{router}', 'ReactController@index')->name('home');
 
 
-// Auth::routes();
+// // Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
